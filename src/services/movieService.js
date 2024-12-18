@@ -11,6 +11,12 @@ const fetchMoviesByGenres = async (genre1, genre2) => {
     return response.data.results;
   };  
 
+const fetchMoviePairing = async (movie1, movie2) => {
+    const url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_keywords=${movie1},${movie2}`;
+    const response = await axios.get(url);
+    return response.data.results; // Return recommended movies
+};
+
 const fetchRandomMovie = async () => {
   const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}`;
   const response = await axios.get(url);
@@ -24,4 +30,4 @@ const fetchMovieDetails = async (id) => {
   return response.data;
 };
 
-module.exports = { fetchMoviesByGenres, fetchRandomMovie, fetchMovieDetails };
+module.exports = { fetchMoviesByGenres, fetchRandomMovie, fetchMovieDetails, fetchMoviePairing, };

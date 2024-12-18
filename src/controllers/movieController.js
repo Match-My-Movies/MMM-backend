@@ -11,6 +11,16 @@ const getMoviesByGenres = async (req, res) => {
   }
 };
 
+const getMoviePairing = async (req, res) => {
+  try {
+    const { movie1, movie2 } = req.query;
+    const movies = await movieService.fetchMoviePairing(movie1, movie2);
+    res.json(movies);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch movie pairing" });
+  }
+};
+
 const getRandomMovie = async (req, res) => {
   try {
     const movie = await movieService.fetchRandomMovie();
@@ -30,4 +40,4 @@ const getMovieDetails = async (req, res) => {
   }
 };
 
-module.exports = { getMoviesByGenres, getRandomMovie, getMovieDetails };
+module.exports = { getMoviesByGenres, getRandomMovie, getMovieDetails, getMoviePairing, };
